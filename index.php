@@ -272,10 +272,33 @@ include 'db.php';
 
 </html>
 <!-- ITL Seite 1
-Arbeitsauftrag PHP/Formulare
-Hinweis: Ich bewerte die Aufgaben auf Ihren Rechner. Es soll alles lauffähig sein und sie müssen in der Lage sein, Fragen zu Ihren Projekt zu beantworten.
+Arbeitsauftrag PHP/Datenbankzugriff
+Vorbereitung: Erweitern Sie Ihre vorhandene Webseite
+Ziel: Lernen Sie dynamische Webseiten mit PHP zu erzeugen und eine Datenbank (MariaDB) mit einzubeziehen.
+Abgabe: Auf Teams unter der jeweiligen Übungsaufgabe Programm Code gezippt und jeweils ein Screenshot von jeder Aufgabe
+Hinweis: Ich bewerte die Aufgaben auf Ihren Rechner. 
+Es soll alles lauffähig sein und sie müssen in der Lage sein, Fragen zu Ihrem Projekt (Code und DB) zu beantworten.
 
-Aufgabe 3: Überlegen Sie sich ein zusätzliches Feature (Pkt. 10), das Sie mit PHP-Formularen umsetzen können.
-Hinweis: Das Feature soll etwas zu Ihren Unternehmen passendes sein und eine umfangreiche Erweiterung darstellen.
-Ziel: Setzen sie umfangreiche dynamische serverseitg Inhalte um.
+
+Aufgabe 1: Speichern sie die Daten die sie bisher in eine Datei geschrieben haben in die Datenbank. 
+Einerseits sollen die Newsletter-Daten in die DB geschrieben werden und auch aus dieser gelesen und angezeigt werden. 
+Erstellen sie dazu einen geeigneten Table in der DB(Pkt. 30).
+Auch die Öffnungszeiten sollen in der Datenbank abgelegt werden und aus dieser abgerufen werden. (Pkt. 30)
+Ziel: Schreiben und lesen mit PHP in eine DB
+
+
+Aufgabe 2:Die Öffnungszeiten und die Newsletter-Anmeldungen sollen voll editierbar sein und alles CRUD-Funktionen umsetzen.( (Pkt. 20)
+Info: CRUD ist die Abkürzung für CREATE (Erstellen), READ (Lesen), UPDATE (Aktualisieren) und DELETE (Löschen). 
+Dies sind die vier grundlegenden Operationen zur Erstellung und Verwaltung persistenter Datenelemente,
+die hauptsächlich in relationalen und NoSQL-Datenbanken zum Einsatz kommen.
+Ziel: Sie lernen CRUD-Funktionen kennen und umzusetzen
+
+
+Aufgabe 3: Sie benutzen bereits Session für den Login und jetzt sollen die Benutzerdaten in der Datenbank gespeichert werden(10 PKT). 
+Für Passwörter sollten Sie Hashfunktionen verwenden(5 PKT).
+Zusätzlich soll es auch möglich sein, dass sich User selbst einen Account anlegen und ein Passwort vergeben.(5 PKT)
+Hinweis: Sie müssen nicht alle Anforderungen umsetzen. 
+Die Hashfunktionen wurden im Unterricht nicht durchgenommen und Sie sollen sich diese bewusst im Selbststudium aneignen, 
+um für eine volle Punktezahl die Anforderung etwas höher zu setzen.
+Ziel: Umgang mit Logindaten und Hashfunktionen
 -->
