@@ -271,9 +271,7 @@ if (isset($_POST['merk_buch'])) {
 </body>
 
 </html>
-<!-- Aufgabe 1 & 2: - Bugfix: Die Öffnungszeiten sollen auf der Maske aktualisiert werrden
-
-Aufgabe 3: Sie benutzen bereits Session für den Login und jetzt sollen die Benutzerdaten in der Datenbank gespeichert werden(10 PKT). 
+<!-- Aufgabe 3: Sie benutzen bereits Session für den Login und jetzt sollen die Benutzerdaten in der Datenbank gespeichert werden(10 PKT). 
 Für Passwörter sollten Sie Hashfunktionen verwenden(5 PKT).
 Zusätzlich soll es auch möglich sein, dass sich User selbst einen Account anlegen und ein Passwort vergeben.(5 PKT)
 Hinweis: Sie müssen nicht alle Anforderungen umsetzen. 

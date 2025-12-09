@@ -1,94 +1,138 @@
 <?php
-include_once 'db.php';
+session_start();
+include_once "db.php";
 
-$message = "";
+$message = $_SESSION['msg'] ?? "";
+unset($_SESSION['msg']);
 
-// Öffnungszeiten laden
-$stmt = $db->query("SELECT * FROM oeffnungszeiten ORDER BY id DESC LIMIT 1");
-$editData = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$editData) {
-    // Standardwerte, falls keine Daten vorhanden
-    $editData = ['opening_time' => '08:00', 'closing_time' => '18:00', 'id' => null];
+if (isset($_GET['delete'])) {
+    $stmt = $db->prepare("DELETE FROM oeffnungszeiten WHERE id=?");
+    $stmt->execute([$_GET['delete']]);
+
+    $_SESSION['msg'] = "Eintrag gelöscht!";
+    header("Location: oeffnungszeiten.php");
+    exit;
 }
 
-// Öffnungszeiten speichern
-if (isset($_POST['opening_time'], $_POST['closing_time'])) {
-    $opening_time = $_POST['opening_time'];
-    $closing_time  = $_POST['closing_time'];
+$editData = [
+    'id' => '',
+    'opening_time' => '',
+    'closing_time' => ''
+];
+
+if (isset($_GET['edit'])) {
+    $stmt = $db->prepare("SELECT * FROM oeffnungszeiten WHERE id=?");
+    $stmt->execute([$_GET['edit']]);
+    $editData = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+if (isset($_POST['save'])) {
+    $opening = $_POST['opening_time'];
+    $closing = $_POST['closing_time'];
 
     if (!empty($_POST['id'])) {
         // Update
         $stmt = $db->prepare("UPDATE oeffnungszeiten SET opening_time=?, closing_time=? WHERE id=?");
-        $stmt->execute([$opening_time, $closing_time, $_POST['id']]);
-        $message = "Öffnungszeiten aktualisiert!";
+        $stmt->execute([$opening, $closing, $_POST['id']]);
+
+        $_SESSION['msg'] = "Eintrag aktualisiert!";
     } else {
-        // Neu anlegen
+        // Insert
         $stmt = $db->prepare("INSERT INTO oeffnungszeiten (opening_time, closing_time) VALUES (?, ?)");
-        $stmt->execute([$opening_time, $closing_time]);
-        $message = "Öffnungszeiten hinzugefügt!";
-        $_POST['id'] = $db->lastInsertId(); // neue ID für Maske
+        $stmt->execute([$opening, $closing]);
+
+        $_SESSION['msg'] = "Eintrag hinzugefügt!";
     }
 
-    // Maske aktualisieren
-    $editData['opening_time'] = $opening_time;
-    $editData['closing_time'] = $closing_time;
-    $editData['id'] = $_POST['id'];
+    header("Location: oeffnungszeiten.php");
+    exit;
 }
-?>
 
+$stmt = $db->query("SELECT * FROM oeffnungszeiten ORDER BY id");
+$list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="de">
 
 <head>
     <meta charset="UTF-8">
-    <title>Öffnungszeiten bearbeiten</title>
+    <title>Öffnungszeiten</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <?php include '_menu.php'; ?>
-    <br>
-    <div class="container mt-5">
-        <h1>Öffnungszeiten bearbeiten</h1>
+<div class="container mt-4">
 
-        <div class="card mb-4">
-            <div class="card-header">
-                <?= $editData['id'] ? "Eintrag bearbeiten" : "Neuen Eintrag anlegen" ?>
-            </div>
-            <div class="card-body">
-                <form method="post">
-                    <?php if ($editData['id']): ?>
-                        <input type="hidden" name="id" value="<?= $editData['id'] ?>">
-                    <?php endif; ?>
+    <h1>Öffnungszeiten verwalten</h1>
 
-                    <div class="mb-3">
-                        <label>Öffnungszeit</label>
-                        <input type="time" name="opening_time"
-                            value="<?= htmlspecialchars($editData['opening_time']) ?>"
-                            class="form-control" required>
-                    </div>
+    <?php if ($message): ?>
+        <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
+    <?php endif; ?>
 
-                    <div class="mb-3">
-                        <label>Schlusszeit</label>
-                        <input type="time" name="closing_time"
-                            value="<?= htmlspecialchars($editData['closing_time']) ?>"
-                            class="form-control" required>
-                    </div>
-
-                    <button class="btn btn-primary"><?= $editData['id'] ? "Speichern" : "Hinzufügen" ?></button>
-                    <?php if ($editData['id']): ?>
-                        <a href="oeffnungszeiten.php" class="btn btn-secondary">Abbrechen</a>
-                    <?php endif; ?>
-                </form>
-            </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <?= $editData['id'] ? "Eintrag bearbeiten" : "Neuen Eintrag hinzufügen" ?>
         </div>
 
-        <?php if ($message): ?>
-            <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
-        <?php endif; ?>
+        <div class="card-body">
+            <form method="post">
+
+                <input type="hidden" name="id" value="<?= $editData['id'] ?>">
+
+                <div class="mb-3">
+                    <label>Öffnungszeit</label>
+                    <input type="time" class="form-control"
+                           name="opening_time"
+                           value="<?= $editData['opening_time'] ?>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Schlusszeit</label>
+                    <input type="time" class="form-control"
+                           name="closing_time"
+                           value="<?= $editData['closing_time'] ?>" required>
+                </div>
+
+                <button class="btn btn-primary" name="save">Speichern</button>
+
+                <?php if ($editData['id']): ?>
+                    <a href="oeffnungszeiten.php" class="btn btn-secondary">Abbrechen</a>
+                <?php endif; ?>
+
+            </form>
+        </div>
     </div>
+
+      <h2>Alle Einträge</h2>
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Öffnet</th>
+            <th>Schließt</th>
+            <th>Aktion</th>
+        </tr>
+
+        <?php foreach ($list as $row): ?>
+            <tr>
+                <td><?= $row['id'] ?></td>
+                <td><?= $row['opening_time'] ?></td>
+                <td><?= $row['closing_time'] ?></td>
+                <td>
+                    <a href="oeffnungszeiten.php?edit=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Bearbeiten</a>
+                    <a href="oeffnungszeiten.php?delete=<?= $row['id'] ?>"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Sicher löschen?');">
+                        Löschen
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+
+</div>
 </body>
 
 </html>
