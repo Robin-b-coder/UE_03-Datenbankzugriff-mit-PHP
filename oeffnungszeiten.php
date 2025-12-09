@@ -63,7 +63,11 @@ $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-<div class="container mt-4">
+<?php 
+include_once '_menu.php';
+?>
+<br>
+<div class="container mt-5">
 
     <h1>Öffnungszeiten verwalten</h1>
 
