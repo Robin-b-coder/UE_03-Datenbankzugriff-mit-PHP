@@ -279,13 +279,7 @@ Abgabe: Auf Teams unter der jeweiligen Übungsaufgabe Programm Code gezippt und 
 Hinweis: Ich bewerte die Aufgaben auf Ihren Rechner. 
 Es soll alles lauffähig sein und sie müssen in der Lage sein, Fragen zu Ihrem Projekt (Code und DB) zu beantworten.
 
-Aufgabe 1 - Bugfix: Die Öffnungszeiten sollen auf der Maske aktualisiert werrden
-
-Aufgabe 2:Die Öffnungszeiten und die Newsletter-Anmeldungen sollen voll editierbar sein und alles CRUD-Funktionen umsetzen.( (Pkt. 20)
-Info: CRUD ist die Abkürzung für CREATE (Erstellen), READ (Lesen), UPDATE (Aktualisieren) und DELETE (Löschen). 
-Dies sind die vier grundlegenden Operationen zur Erstellung und Verwaltung persistenter Datenelemente,
-die hauptsächlich in relationalen und NoSQL-Datenbanken zum Einsatz kommen.
-Ziel: Sie lernen CRUD-Funktionen kennen und umzusetzen
+Aufgabe 1 & 2: - Bugfix: Die Öffnungszeiten sollen auf der Maske aktualisiert werrden
 
 Aufgabe 3: Sie benutzen bereits Session für den Login und jetzt sollen die Benutzerdaten in der Datenbank gespeichert werden(10 PKT). 
 Für Passwörter sollten Sie Hashfunktionen verwenden(5 PKT).
