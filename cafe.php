@@ -14,7 +14,6 @@
 
     <?php include '_menu.php'; ?>
 
-
     <div class="container pt-4">
         <h1 class="mt-5">Das Café</h1>
 
