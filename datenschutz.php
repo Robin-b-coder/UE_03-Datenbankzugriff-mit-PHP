@@ -13,7 +13,8 @@
 <body>
     <?php include '_menu.php'; ?>
 
-    <h1>Datenschutz</h1>
+<div class="container pt-4">
+        <h1 class="mt-5">Datenschutz</h1>
     <header class="bg-transparent text-white text-center py-5">
         <div class="container">
             <p>Diese Website wird betrieben von der Buchhandlung Siegl. In dieser Datenschutzerklärung wird von uns als

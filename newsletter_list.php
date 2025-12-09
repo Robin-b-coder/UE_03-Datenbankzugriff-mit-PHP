@@ -22,8 +22,8 @@ $rows = $stmt->fetchAll();
 <body>
     <?php include_once '_menu.php'; ?>
 
-    <div class="container mt-4">
-        <h1 class="mb-4">Newsletter-Anmeldungen</h1>
+<div class="container pt-4">
+        <h1 class="mt-5">Newsletter-Anmeldungen</h1>
 
         <?php if (count($rows) > 0): ?>
             <table class="table table-bordered table-striped align-middle">

@@ -15,7 +15,8 @@
     <?php include '_menu.php'; ?>
 
 
-    <h1>Café</h1>
+<div class="container pt-4">
+        <h1 class="mt-5">Das Café</h1>
 
     <h3> Bei Fragen / Reservierung rufen Sie die Nummer auf dieser Seite an </h3>
     <a href="contact.php">Zum Kontakt</a>
