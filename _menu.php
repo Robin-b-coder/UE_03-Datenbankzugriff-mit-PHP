@@ -48,6 +48,7 @@ $geoeffnet = ($jetzt >= $start && $jetzt <= $ende);
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item"><a class="nav-link" href="merkliste.php">Merkliste</a></li>
 
                 <?php if (!empty($_SESSION['logged_in'])): ?>
                     <li class="nav-item"><a class="nav-link" href="newsletter_list.php">Newsletter</a></li>
@@ -57,7 +58,6 @@ $geoeffnet = ($jetzt >= $start && $jetzt <= $ende);
                     <li class="nav-item"><a class="nav-link" href="login.php">Anmelden</a></li>
                     <li class="nav-item"><a class="nav-link" href="signup.php">Registrieren</a></li>
                 <?php endif; ?>
-                <li class="nav-item"><a class="nav-link" href="merkliste.php">Merkliste</a></li>
             </ul>
         </div>
     </div>
