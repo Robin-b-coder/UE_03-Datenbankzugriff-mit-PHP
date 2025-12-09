@@ -13,7 +13,8 @@
 <body>
     <?php include '_menu.php'; ?>
 
-    <h1>Speisekarte</h1>
+<div class="container pt-4">
+        <h1 class="mt-5">Die Speisekarte</h1>
     <header class="bg-transparent text-white text-center py-5">
         <div class="container">
             <p>Entdecken Sie eine große an Kaffee, Pancakes, Kuchen und mehr
