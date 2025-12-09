@@ -271,15 +271,7 @@ if (isset($_POST['merk_buch'])) {
 </body>
 
 </html>
-<!-- ITL Seite 1
-Arbeitsauftrag PHP/Datenbankzugriff
-Vorbereitung: Erweitern Sie Ihre vorhandene Webseite
-Ziel: Lernen Sie dynamische Webseiten mit PHP zu erzeugen und eine Datenbank (MariaDB) mit einzubeziehen.
-Abgabe: Auf Teams unter der jeweiligen Übungsaufgabe Programm Code gezippt und jeweils ein Screenshot von jeder Aufgabe
-Hinweis: Ich bewerte die Aufgaben auf Ihren Rechner. 
-Es soll alles lauffähig sein und sie müssen in der Lage sein, Fragen zu Ihrem Projekt (Code und DB) zu beantworten.
-
-Aufgabe 1 & 2: - Bugfix: Die Öffnungszeiten sollen auf der Maske aktualisiert werrden
+<!-- Aufgabe 1 & 2: - Bugfix: Die Öffnungszeiten sollen auf der Maske aktualisiert werrden
 
 Aufgabe 3: Sie benutzen bereits Session für den Login und jetzt sollen die Benutzerdaten in der Datenbank gespeichert werden(10 PKT). 
 Für Passwörter sollten Sie Hashfunktionen verwenden(5 PKT).
