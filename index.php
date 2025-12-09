@@ -72,7 +72,7 @@ if (isset($_POST['merk_buch'])) {
     <title>Buchhandlung Siegl</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="./favicon_buchhandlung.jpg">
+    <link rel="icon" href="pictures/favicon_buchhandlung.jpg">
 </head>
 
 <body>
@@ -103,21 +103,21 @@ if (isset($_POST['merk_buch'])) {
             <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="buchhandlung.jpg" class="d-block w-100 carousel-img" alt="Bild 1">
+                        <img src="pictures/buchhandlung.jpg" class="d-block w-100 carousel-img" alt="Bild 1">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Bild 1</h5>
                             <p>Unser Äußeres.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="buchhandlung_wien.jpg" class="d-block w-100 carousel-img" alt="Bild 2">
+                        <img src="pictures/buchhandlung_wien.jpg" class="d-block w-100 carousel-img" alt="Bild 2">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Bild 2</h5>
                             <p>Unsere Inneneinrichtung</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="wiener_buchhandlung.jpg" class="d-block w-100 carousel-img" alt="Bild 3">
+                        <img src="pictures/wiener_buchhandlung.jpg" class="d-block w-100 carousel-img" alt="Bild 3">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Bild 3</h5>
                         </div>
@@ -183,7 +183,7 @@ if (isset($_POST['merk_buch'])) {
         <div id="empfehlungKarussel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="Flag_of_Panem.svg" class="d-block w-100 carousel-img" alt="Buch 1">
+                    <img src="pictures/Flag_of_Panem.svg" class="d-block w-100 carousel-img" alt="Buch 1">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Buch 1</h5>
                         <p>Spannender Roman für den Sommer.</p>
@@ -200,7 +200,7 @@ if (isset($_POST['merk_buch'])) {
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="garfield.jpg" class="d-block w-100 carousel-img" alt="Buch 2">
+                    <img src="pictures/garfield.jpg" class="d-block w-100 carousel-img" alt="Buch 2">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Buch 2</h5>
                         <p>Lustige Comics.</p>
@@ -217,7 +217,7 @@ if (isset($_POST['merk_buch'])) {
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="fairy_tail.avif" class="d-block w-100 carousel-img" alt="Buch 3">
+                    <img src="pictures/fairy_tail.avif" class="d-block w-100 carousel-img" alt="Buch 3">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Buch 3</h5>
                         <p>Mangas.</p>

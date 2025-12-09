@@ -26,19 +26,19 @@
             <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="buchhandlung_wien_draußen.jpg" class="d-block w-100 carousel-img" alt="Bild 1">
+                        <img src="pictures/buchhandlung_wien_draußen.jpg" class="d-block w-100 carousel-img" alt="Bild 1">
                         <div class="carousel-caption d-none d-md-block">
                             <h2>Unsere Hauptzentrale und die erste Buchhandlung von Siegl</h2>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="Manga-Mafia_Store_Ulm_065142.jpg" class="d-block w-100 carousel-img" alt="Bild 2">
+                        <img src="pictures/Manga-Mafia_Store_Ulm_065142.jpg" class="d-block w-100 carousel-img" alt="Bild 2">
                         <div class="carousel-caption d-none d-md-block">
                             <h2>Die zweite Buchhandlung</h2>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="Höllrigl_Salzburg_1.jpg" class="d-block w-100 carousel-img" alt="Bild 3">
+                        <img src="pictures/Höllrigl_Salzburg_1.jpg" class="d-block w-100 carousel-img" alt="Bild 3">
                         <div class="carousel-caption d-none d-md-block">
                             <h2>Die dritte Filliale</h2>
                         </div>

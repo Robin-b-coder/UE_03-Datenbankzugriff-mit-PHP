@@ -22,37 +22,37 @@
                 <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="Speisekarte (1).jpg" class="d-block w-100 carousel-img" alt="Bild 1">
+                            <img src="pictures/Speisekarte (1).jpg" class="d-block w-100 carousel-img" alt="Bild 1">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Seite 1</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="Speisekarte (2).jpg" class="d-block w-100 carousel-img" alt="Bild 2">
+                            <img src="pictures/Speisekarte (2).jpg" class="d-block w-100 carousel-img" alt="Bild 2">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Seite 2</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="Speisekarte (3).jpg" class="d-block w-100 carousel-img" alt="Bild 3">
+                            <img src="pictures/Speisekarte (3).jpg" class="d-block w-100 carousel-img" alt="Bild 3">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Seite 3</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="Speisekarte (4).jpg" class="d-block w-100 carousel-img" alt="Bild 3">
+                            <img src="pictures/Speisekarte (4).jpg" class="d-block w-100 carousel-img" alt="Bild 3">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Seite 4</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="Speisekarte (5).jpg" class="d-block w-100 carousel-img" alt="Bild 3">
+                            <img src="pictures/Speisekarte (5).jpg" class="d-block w-100 carousel-img" alt="Bild 3">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Seite 5</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="Speisekarte (6).jpg" class="d-block w-100 carousel-img" alt="Bild 3">
+                            <img src="pictures/Speisekarte (6).jpg" class="d-block w-100 carousel-img" alt="Bild 3">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Seite 6</p>
                             </div>

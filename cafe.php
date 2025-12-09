@@ -35,19 +35,19 @@
                 <div id="bookCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="Café_Hofburg_Wien_2008_Melange_1.jpg" class="d-block w-100 carousel-img" alt="Bild 1">
+                            <img src="pictures/Café_Hofburg_Wien_2008_Melange_1.jpg" class="d-block w-100 carousel-img" alt="Bild 1">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Bild 1</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="café.jpg" class="d-block w-100 carousel-img" alt="Bild 2">
+                            <img src="pictures/café.jpg" class="d-block w-100 carousel-img" alt="Bild 2">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Bild 2</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="pancake.jpg" class="d-block w-100 carousel-img" alt="Bild 3">
+                            <img src="pictures/pancake.jpg" class="d-block w-100 carousel-img" alt="Bild 3">
                             <div class="carousel-caption d-none d-md-block">
                                 <p>Bild 3</p>
                             </div>
