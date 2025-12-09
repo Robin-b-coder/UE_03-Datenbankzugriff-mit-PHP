@@ -79,9 +79,9 @@ if (isset($_POST['merk_buch'])) {
     <?php include '_menu.php'; ?>
 
 
-<?php 
-include 'db.php';
-?>
+    <?php
+    include 'db.php';
+    ?>
 
     <div class="container mt-3">
         <p>
@@ -151,7 +151,7 @@ include 'db.php';
     <br>
 
     <?php
-   /* if (isset($_POST['email'], $_POST['fullName'], $_POST['address'])) {
+    /* if (isset($_POST['email'], $_POST['fullName'], $_POST['address'])) {
         $email = htmlspecialchars($_POST['email']);
         $name = htmlspecialchars($_POST['fullName']);
         $address = htmlspecialchars($_POST['address']);
@@ -163,15 +163,15 @@ include 'db.php';
     }*/ //gespeichert auf email.txt Datei
 
     if (isset($_POST['email'], $_POST['fullName'], $_POST['address'])) {
-    $email = htmlspecialchars($_POST['email']);
-    $name = htmlspecialchars($_POST['fullName']);
-    $address = htmlspecialchars($_POST['address']);
+        $email = htmlspecialchars($_POST['email']);
+        $name = htmlspecialchars($_POST['fullName']);
+        $address = htmlspecialchars($_POST['address']);
 
-    $stmt = $db->prepare("INSERT INTO newsletter (email, fullName, address) VALUES (?, ?, ?)");
-    $stmt->execute([$email, $name, $address]);
+        $stmt = $db->prepare("INSERT INTO newsletter (email, fullName, address) VALUES (?, ?, ?)");
+        $stmt->execute([$email, $name, $address]);
 
-    echo '<div class="alert alert-success">Danke, Ihre Anmeldung wurde erfolgreich gespeichert!</div>';
-}
+        echo '<div class="alert alert-success">Danke, Ihre Anmeldung wurde erfolgreich gespeichert!</div>';
+    }
 
     ?>
 
@@ -279,13 +279,7 @@ Abgabe: Auf Teams unter der jeweiligen Übungsaufgabe Programm Code gezippt und 
 Hinweis: Ich bewerte die Aufgaben auf Ihren Rechner. 
 Es soll alles lauffähig sein und sie müssen in der Lage sein, Fragen zu Ihrem Projekt (Code und DB) zu beantworten.
 
-
-Aufgabe 1: Speichern sie die Daten die sie bisher in eine Datei geschrieben haben in die Datenbank. 
-Einerseits sollen die Newsletter-Daten in die DB geschrieben werden und auch aus dieser gelesen und angezeigt werden. 
-Erstellen sie dazu einen geeigneten Table in der DB(Pkt. 30).
-Auch die Öffnungszeiten sollen in der Datenbank abgelegt werden und aus dieser abgerufen werden. (Pkt. 30)
-Ziel: Schreiben und lesen mit PHP in eine DB
-
+Aufgabe 1 - Bugfix: Die Öffnungszeiten sollen auf der Maske aktualisiert werrden
 
 Aufgabe 2:Die Öffnungszeiten und die Newsletter-Anmeldungen sollen voll editierbar sein und alles CRUD-Funktionen umsetzen.( (Pkt. 20)
 Info: CRUD ist die Abkürzung für CREATE (Erstellen), READ (Lesen), UPDATE (Aktualisieren) und DELETE (Löschen). 

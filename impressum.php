@@ -14,7 +14,8 @@
 
         h1 {
             color: green;
-            font-size: 3rem; /* größer */
+            font-size: 3rem;
+            /* größer */
             display: flex;
             justify-content: center;
             margin: 1rem 0;
@@ -22,7 +23,8 @@
 
         h2 {
             color: blue;
-            font-size: 2rem; /* größer */
+            font-size: 2rem;
+            /* größer */
             display: flex;
             justify-content: center;
             margin: 0.8rem 0;
@@ -31,7 +33,8 @@
         p {
             color: black;
             font-weight: bold;
-            font-size: 1.3rem; /* größer */
+            font-size: 1.3rem;
+            /* größer */
             margin: 0.3rem 0;
         }
 
@@ -57,7 +60,7 @@
 
 <body>
 
-  <?php include '_menu.php'; ?>
+    <?php include '_menu.php'; ?>
 
 
     <h1>Impressum</h1>

@@ -12,8 +12,8 @@
 
 <body>
 
-<?php include '_menu.php'; ?>
-    
+    <?php include '_menu.php'; ?>
+
 
     <h1>Café</h1>
 

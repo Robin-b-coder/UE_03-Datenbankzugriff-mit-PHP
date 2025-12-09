@@ -1,12 +1,12 @@
- <?php 
+ <?php
     $DB_HOST = "localhost"; //Host-Adresse
     $DB_NAME = "aufgabe"; //Datenbankname
     $DB_BENUTZER = "root"; //Benutzername
     $DB_PASSWORD = ""; // Passwort
-$OPTION = [
-    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4",
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-];
+    $OPTION = [
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4",
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ];
 
 
     try {
