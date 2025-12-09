@@ -79,7 +79,7 @@ if (isset($_POST['edit_id'])) {
                     <button class="btn btn-primary"><?= $editData ? "Speichern" : "Hinzufügen" ?></button>
 
                     <?php if ($editData): ?>
-                        <a href="newsletter-list.php" class="btn btn-secondary">Abbrechen</a>
+                        <a href="newsletter_list.php" class="btn btn-secondary">Abbrechen</a>
                     <?php endif; ?>
                 </form>
             </div>
