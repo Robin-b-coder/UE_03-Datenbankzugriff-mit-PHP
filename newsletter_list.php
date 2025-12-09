@@ -32,6 +32,7 @@ if (isset($_POST['edit_id'])) {
 ?>
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <title>Newsletter</title>
@@ -40,82 +41,82 @@ if (isset($_POST['edit_id'])) {
 </head>
 
 <body>
-<?php include "_menu.php"; ?>
-<div class="container mt-5">
+    <?php include "_menu.php"; ?>
+    <div class="container mt-5">
 
-    <h1>Newsletter</h1>
+        <h1>Newsletter</h1>
 
-    <div class="card mb-4">
-        <div class="card-header">
-            <?= $editData ? "Eintrag bearbeiten" : "Neuen Eintrag anlegen" ?>
+        <div class="card mb-4">
+            <div class="card-header">
+                <?= $editData ? "Eintrag bearbeiten" : "Neuen Eintrag anlegen" ?>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <input type="hidden" name="form_action" value="<?= $editData ? 'update' : 'create' ?>">
+
+                    <?php if ($editData): ?>
+                        <input type="hidden" name="id" value="<?= $editData['id'] ?>">
+                    <?php endif; ?>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input class="form-control" type="email" name="email"
+                            value="<?= $editData['email'] ?? '' ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Name</label>
+                        <input class="form-control" type="text" name="fullName"
+                            value="<?= $editData['fullName'] ?? '' ?>">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Adresse</label>
+                        <input class="form-control" type="text" name="address"
+                            value="<?= $editData['address'] ?? '' ?>">
+                    </div>
+
+                    <button class="btn btn-primary"><?= $editData ? "Speichern" : "Hinzufügen" ?></button>
+
+                    <?php if ($editData): ?>
+                        <a href="newsletter-list.php" class="btn btn-secondary">Abbrechen</a>
+                    <?php endif; ?>
+                </form>
+            </div>
         </div>
-        <div class="card-body">
-            <form method="post">
-                <input type="hidden" name="form_action" value="<?= $editData ? 'update' : 'create' ?>">
 
-                <?php if ($editData): ?>
-                    <input type="hidden" name="id" value="<?= $editData['id'] ?>">
-                <?php endif; ?>
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Adresse</th>
+                    <th>Aktionen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($rows as $row): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['email']) ?></td>
+                        <td><?= htmlspecialchars($row['fullName']) ?></td>
+                        <td><?= htmlspecialchars($row['address']) ?></td>
+                        <td>
 
-                <div class="mb-3">
-                    <label>Email</label>
-                    <input class="form-control" type="email" name="email"
-                           value="<?= $editData['email'] ?? '' ?>" required>
-                </div>
+                            <form method="post" style="display:inline;">
+                                <input type="hidden" name="edit_id" value="<?= $row['id'] ?>">
+                                <button class="btn btn-warning btn-sm">Bearbeiten</button>
+                            </form>
 
-                <div class="mb-3">
-                    <label>Name</label>
-                    <input class="form-control" type="text" name="fullName"
-                           value="<?= $editData['fullName'] ?? '' ?>">
-                </div>
-
-                <div class="mb-3">
-                    <label>Adresse</label>
-                    <input class="form-control" type="text" name="address"
-                           value="<?= $editData['address'] ?? '' ?>">
-                </div>
-
-                <button class="btn btn-primary"><?= $editData ? "Speichern" : "Hinzufügen" ?></button>
-
-                <?php if ($editData): ?>
-                    <a href="newsletter-list.php" class="btn btn-secondary">Abbrechen</a>
-                <?php endif; ?>
-            </form>
-        </div>
+                            <form method="post" style="display:inline;" onsubmit="return confirm('Wirklich löschen?');">
+                                <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
+                                <button class="btn btn-danger btn-sm">Löschen</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
-
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th>Email</th>
-                <th>Name</th>
-                <th>Adresse</th>
-                <th>Aktionen</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($rows as $row): ?>
-            <tr>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= htmlspecialchars($row['fullName']) ?></td>
-                <td><?= htmlspecialchars($row['address']) ?></td>
-                <td>
-
-                    <form method="post" style="display:inline;">
-                        <input type="hidden" name="edit_id" value="<?= $row['id'] ?>">
-                        <button class="btn btn-warning btn-sm">Bearbeiten</button>
-                    </form>
-
-                    <form method="post" style="display:inline;" onsubmit="return confirm('Wirklich löschen?');">
-                        <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
-                        <button class="btn btn-danger btn-sm">Löschen</button>
-                    </form>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
 </body>
 
 </html>

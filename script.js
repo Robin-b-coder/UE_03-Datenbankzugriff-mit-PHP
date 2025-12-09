@@ -1,35 +1,35 @@
 // Book Search/Filter
 function filterBooks(searchTerm) {
-    const filter = searchTerm.toLowerCase();
-    const items = document.querySelectorAll('#bookList li');
-    items.forEach(item => {
-        item.style.display = item.textContent.toLowerCase().includes(filter) ? '' : 'none';
-    });
+  const filter = searchTerm.toLowerCase();
+  const items = document.querySelectorAll('#bookList li');
+  items.forEach(item => {
+    item.style.display = item.textContent.toLowerCase().includes(filter) ? '' : 'none';
+  });
 }
 // Sticky Navbar
 function setStickyNavbar(threshold) {
-    const nav = document.getElementById('mainNav');
-    if (window.scrollY > threshold) {
-        nav.classList.add('sticky-nav', 'shadow');
-    } else {
-        nav.classList.remove('sticky-nav', 'shadow');
-    }
+  const nav = document.getElementById('mainNav');
+  if (window.scrollY > threshold) {
+    nav.classList.add('sticky-nav', 'shadow');
+  } else {
+    nav.classList.remove('sticky-nav', 'shadow');
+  }
 }
 
 // Beispiel für Event-Listener mit den Funktionen
 window.addEventListener('scroll', function () {
-    setStickyNavbar(50);
+  setStickyNavbar(50);
 });
 
 document.getElementById('searchInput').addEventListener('input', function () {
-    filterBooks(this.value);
+  filterBooks(this.value);
 });
 
 // Get the button:
 let mybutton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () { scrollFunction() };
 
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
