@@ -287,7 +287,6 @@ Dies sind die vier grundlegenden Operationen zur Erstellung und Verwaltung persi
 die hauptsächlich in relationalen und NoSQL-Datenbanken zum Einsatz kommen.
 Ziel: Sie lernen CRUD-Funktionen kennen und umzusetzen
 
-
 Aufgabe 3: Sie benutzen bereits Session für den Login und jetzt sollen die Benutzerdaten in der Datenbank gespeichert werden(10 PKT). 
 Für Passwörter sollten Sie Hashfunktionen verwenden(5 PKT).
 Zusätzlich soll es auch möglich sein, dass sich User selbst einen Account anlegen und ein Passwort vergeben.(5 PKT)
