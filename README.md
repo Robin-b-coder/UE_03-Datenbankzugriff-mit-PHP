@@ -1,2 +1,2 @@
 # UE_03-Datenbankzugriff-mit-PHP
-PHP mitaufgabe wo Datenbank verwendet wird
+PHP mit aufgabe wo Datenbank verwendet wird
