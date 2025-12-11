@@ -5,7 +5,7 @@ include_once 'db.php';
 $message = "";
 if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = trim($_POST['username']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = trim($_POST['password']); // Klartext speichern
 
     // prüfen ob Benutzer existiert
     $stmt = $db->prepare("SELECT id FROM users WHERE username = ?");
@@ -22,39 +22,6 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     }
 }
 
-/*$usersFile = __DIR__ . "/users.txt";
-$message = "";
-
-// Formular abgeschickt
-if (!empty($_POST['username']) && !empty($_POST['password'])) {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-
-    // Benutzerliste laden
-    $users = [];
-    if (file_exists($usersFile)) {
-        $lines = file($usersFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($lines as $line) {
-            list($user,) = explode(";", $line);
-            $users[$user] = true;
-        }
-    }
-
-    // Prüfen, ob Benutzer existiert
-    if (isset($users[$username])) {
-        $message = "Benutzername existiert bereits!";
-    } else {
-        // Benutzer speichern
-        file_put_contents($usersFile, "$username;$password\n", FILE_APPEND);
-        $_SESSION['logged_in'] = true;
-        $_SESSION['username'] = $username;
-
-        // Cookie setzen (angemeldet bleiben)
-        setcookie("rememberme", $username, time() + (30*24*60*60)); // 30 Tage
-
-        $message = "Registrierung erfolgreich! Du bist jetzt eingeloggt.";
-    }
-}*/ //gespeichert auf users.txt
 ?>
 
 <!DOCTYPE html>

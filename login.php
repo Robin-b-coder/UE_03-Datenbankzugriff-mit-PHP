@@ -1,47 +1,5 @@
 <?php
 session_start();
-/*$usersFile = __DIR__ . "/users.txt";
-$error = "";
-
-// Cookie prüfen
-if (!empty($_COOKIE['rememberme'])) {
-    $_SESSION['logged_in'] = true;
-    $_SESSION['username'] = $_COOKIE['rememberme'];
-    header("Location: index.php");
-    exit;
-}
-
-// Login abgeschickt
-if (!empty($_POST['username']) && !empty($_POST['password'])) {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-
-    // Benutzerliste laden
-    $found = false;
-    if (file_exists($usersFile)) {
-        $lines = file($usersFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-        foreach ($lines as $line) {
-            list($user, $pw) = explode(";", $line);
-            if ($user === $username && $pw === $password) {
-                $found = true;
-                break;
-            }
-        }
-    }
-
-    if ($found) {
-        $_SESSION['logged_in'] = true;
-        $_SESSION['username'] = $username;
-
-        // Cookie setzen
-        setcookie("rememberme", $username, time() + (30*24*60*60)); // 30 Tage
-
-        header("Location: index.php");
-        exit;
-    } else {
-        $error = "Benutzername oder Passwort falsch!";
-    }
-}*/ /*gespeichert auf users.txt*/
 
 include_once "db.php";
 
