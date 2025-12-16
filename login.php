@@ -57,6 +57,11 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 
             <button class="btn btn-primary" type="submit">Anmelden</button>
         </form>
+        <div class="d-flex justify-content-between mt-3">
+            <a href="reset_password.php" class="btn btn-outline-secondary">Passwort vergessen</a>
+            <a href="registrieren.php" class="btn btn-link">Jetzt registrieren</a>
+        </div>
+
     </div>
 
 </body>
