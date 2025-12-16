@@ -31,6 +31,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -58,7 +59,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
             <button class="btn btn-primary" type="submit">Anmelden</button>
         </form>
         <div class="d-flex justify-content-between mt-3">
-            <a href="reset_password.php" class="btn btn-outline-secondary">Passwort vergessen</a>
+            <a href="reset_password.php" class="btn btn-outline-danger">Passwort vergessen</a>
         </div>
 
     </div>

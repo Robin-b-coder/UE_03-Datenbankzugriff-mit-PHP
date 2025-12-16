@@ -1,6 +1,7 @@
 <?php
 session_start();
 date_default_timezone_set('Europe/Vienna');
+include 'db.php';
 
 // Merkliste initialisieren
 if (!isset($_SESSION['merkliste'])) {
@@ -9,40 +10,7 @@ if (!isset($_SESSION['merkliste'])) {
 
 // Kopie für Button-Farbprüfung
 $merkliste = $_SESSION['merkliste'];
-
-// Öffnungszeiten einlesen
-$zeiten = json_decode(file_get_contents(__DIR__ . '/oeffnungszeiten.json'), true);
-
-// Default-Werte
-$startStr = $zeiten['start'] ?? "08:00";
-$endeStr  = $zeiten['ende'] ?? "18:00";
-
-// Heute als Datum + Zeit
-$heute = date('Y-m-d');
-$start = strtotime("$heute $startStr");
-$ende  = strtotime("$heute $endeStr");
-$jetzt  = time();
-
-// prüfen, ob geöffnet
-$geoeffnet = ($jetzt >= $start && $jetzt <= $ende);
-
-// Nachricht für Anzeige
-$message = $geoeffnet
-    ? "Wir haben geöffnet! ($startStr - $endeStr)"
-    : "Momentan geschlossen. Unsere Öffnungszeiten sind: $startStr - $endeStr (Mitteleuropäische Zeit)";
-
-// Öffnungszeiten aktualisieren
-if (isset($_POST['start'], $_POST['ende'])) {
-    $daten = [
-        'start' => $_POST['start'],
-        'ende'  => $_POST['ende']
-    ];
-    file_put_contents(__DIR__ . '/oeffnungszeiten.json', json_encode($daten));
-    $message = "Öffnungszeiten aktualisiert!";
-    // Reload der Seite, um neuen Status zu sehen
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit;
-}
+$merkliste = $_SESSION['merkliste'];
 
 function existsInList($list, $value)
 {
@@ -61,8 +29,24 @@ if (isset($_POST['merk_buch'])) {
     }
 }
 
-?>
+// Öffnungszeiten aus DB
+$stmt = $db->prepare("SELECT * FROM oeffnungszeiten WHERE weekday=?");
+$stmt->execute([date('N')]);
+$today = $stmt->fetch();
 
+if ($today && !$today['closed']) {
+    $startStr = $today['opening_time'];
+    $endeStr  = $today['closing_time'];
+    $start = strtotime(date('Y-m-d') . ' ' . $startStr);
+    $ende  = strtotime(date('Y-m-d') . ' ' . $endeStr);
+    $jetzt = time();
+    $geoeffnet = ($jetzt >= $start && $jetzt <= $ende);
+} else {
+    $geoeffnet = false;
+    $startStr = $today['opening_time'] ?? "08:00";
+    $endeStr  = $today['closing_time'] ?? "18:00";
+}
+?>
 <!DOCTYPE html>
 <html lang="de-AT">
 
@@ -77,11 +61,6 @@ if (isset($_POST['merk_buch'])) {
 
 <body>
     <?php include '_menu.php'; ?>
-
-
-    <?php
-    include 'db.php';
-    ?>
 
     <div class="container mt-3">
         <p>
@@ -151,17 +130,6 @@ if (isset($_POST['merk_buch'])) {
     <br>
 
     <?php
-    /* if (isset($_POST['email'], $_POST['fullName'], $_POST['address'])) {
-        $email = htmlspecialchars($_POST['email']);
-        $name = htmlspecialchars($_POST['fullName']);
-        $address = htmlspecialchars($_POST['address']);
-
-        $line = "$email;$name;$address\n";
-        file_put_contents(__DIR__ . '/email.txt', $line, FILE_APPEND);
-
-        echo '<div class="alert alert-success">Danke, Ihre Anmeldung wurde erfolgreich gespeichert!</div>';
-    }*/ //gespeichert auf email.txt Datei
-
     if (isset($_POST['email'], $_POST['fullName'], $_POST['address'])) {
         $email = htmlspecialchars($_POST['email']);
         $name = htmlspecialchars($_POST['fullName']);
@@ -265,17 +233,8 @@ if (isset($_POST['merk_buch'])) {
     <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
     <!-- JS: Bootstrap, Sticky Nav, Search Filter -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
 </body>
 
 </html>
-<!-- Aufgabe 3: Sie benutzen bereits Session für den Login und jetzt sollen die Benutzerdaten in der Datenbank gespeichert werden(10 PKT). 
-Für Passwörter sollten Sie Hashfunktionen verwenden(5 PKT).
-Zusätzlich soll es auch möglich sein, dass sich User selbst einen Account anlegen und ein Passwort vergeben.(5 PKT)
-Hinweis: Sie müssen nicht alle Anforderungen umsetzen. 
-Die Hashfunktionen wurden im Unterricht nicht durchgenommen und Sie sollen sich diese bewusst im Selbststudium aneignen, 
-um für eine volle Punktezahl die Anforderung etwas höher zu setzen.
-Ziel: Umgang mit Logindaten und Hashfunktionen
--->
