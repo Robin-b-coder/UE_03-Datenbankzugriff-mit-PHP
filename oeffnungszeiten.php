@@ -5,7 +5,6 @@ include_once "db.php";
 $message = $_SESSION['msg'] ?? "";
 unset($_SESSION['msg']);
 
-/* ---------------- DELETE ---------------- */
 if (isset($_GET['delete'])) {
     $stmt = $db->prepare("DELETE FROM oeffnungszeiten WHERE id=?");
     $stmt->execute([$_GET['delete']]);
@@ -15,7 +14,6 @@ if (isset($_GET['delete'])) {
     exit;
 }
 
-/* ---------------- DEFAULT DATA ---------------- */
 $editData = [
     'id' => '',
     'weekday' => '',
@@ -24,20 +22,31 @@ $editData = [
     'closed' => 0
 ];
 
-/* ---------------- EDIT ---------------- */
 if (isset($_GET['edit'])) {
     $stmt = $db->prepare("SELECT * FROM oeffnungszeiten WHERE id=?");
     $stmt->execute([$_GET['edit']]);
     $editData = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-/* ---------------- SAVE ---------------- */
 if (isset($_POST['save'])) {
     $weekday = $_POST['weekday'];
     $closed  = isset($_POST['closed']) ? 1 : 0;
 
-    $opening = $closed ? null : $_POST['opening_time'];
-    $closing = $closed ? null : $_POST['closing_time'];
+    // Standard: übernommene Werte aus Formular
+    $opening = $_POST['opening_time'] ?? null;
+    $closing = $_POST['closing_time'] ?? null;
+
+    // Wenn geschlossen markiert, alte Werte beibehalten
+    if ($closed && !empty($_POST['id'])) {
+        $stmt = $db->prepare("SELECT opening_time, closing_time FROM oeffnungszeiten WHERE id=?");
+        $stmt->execute([$_POST['id']]);
+        $oldTimes = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($oldTimes) {
+            $opening = $oldTimes['opening_time'];
+            $closing = $oldTimes['closing_time'];
+        }
+    }
 
     if (!empty($_POST['id'])) {
         // UPDATE
@@ -62,7 +71,7 @@ if (isset($_POST['save'])) {
     exit;
 }
 
-/* ---------------- LIST ---------------- */
+
 $stmt = $db->query("SELECT * FROM oeffnungszeiten ORDER BY weekday");
 $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -106,51 +115,53 @@ $days = [
             <div class="card-body">
                 <form method="post">
 
-                    <input type="hidden" name="id" value="<?= $editData['id'] ?>">
+    <input type="hidden" name="id" value="<?= $editData['id'] ?>">
 
-                    <div class="mb-3">
-                        <label>Wochentag</label>
-                        <select name="weekday" class="form-control" required>
-                            <option value="">Bitte wählen</option>
-                            <?php foreach ($days as $key => $day): ?>
-                                <option value="<?= $key ?>" <?= $editData['weekday'] == $key ? 'selected' : '' ?>>
-                                    <?= $day ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
+    <div class="mb-3">
+        <label>Wochentag</label>
+        <select name="weekday" class="form-control" required>
+            <option value="">Bitte wählen</option>
+            <?php foreach ($days as $key => $day): ?>
+                <option value="<?= $key ?>" <?= $editData['weekday'] == $key ? 'selected' : '' ?>>
+                    <?= $day ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 
-                    <div class="form-check mb-3">
-                        <input class="form-check-input" type="checkbox" name="closed" id="closed"
-                            <?= $editData['closed'] ? 'checked' : '' ?>>
-                        <label class="form-check-label" for="closed">
-                            Ganztägig geschlossen
-                        </label>
-                    </div>
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" name="closed" id="closed"
+            <?= $editData['closed'] ? 'checked' : '' ?>>
+        <label class="form-check-label" for="closed">
+            Ganztägig geschlossen
+        </label>
+    </div>
 
-                    <div class="mb-3">
-                        <label>Öffnungszeit</label>
-                        <input type="time" class="form-control"
-                            name="opening_time"
-                            value="<?= $editData['opening_time'] ?>"
-                            <?= $editData['closed'] ? 'disabled' : '' ?>>
-                    </div>
+    <div class="mb-3">
+        <label>Öffnungszeit</label>
+        <input type="time" class="form-control"
+            name="opening_time"
+            id="opening_time"
+            value="<?= $editData['opening_time'] ?>"
+            <?= $editData['closed'] ? 'disabled' : '' ?>>
+    </div>
 
-                    <div class="mb-3">
-                        <label>Schlusszeit</label>
-                        <input type="time" class="form-control"
-                            name="closing_time"
-                            value="<?= $editData['closing_time'] ?>"
-                            <?= $editData['closed'] ? 'disabled' : '' ?>>
-                    </div>
+    <div class="mb-3">
+        <label>Schlusszeit</label>
+        <input type="time" class="form-control"
+            name="closing_time"
+            id="closing_time"
+            value="<?= $editData['closing_time'] ?>"
+            <?= $editData['closed'] ? 'disabled' : '' ?>>
+    </div>
 
-                    <button class="btn btn-primary" name="save">Speichern</button>
+    <button class="btn btn-primary" name="save">Speichern</button>
 
-                    <?php if ($editData['id']): ?>
-                        <a href="oeffnungszeiten.php" class="btn btn-secondary">Abbrechen</a>
-                    <?php endif; ?>
+    <?php if ($editData['id']): ?>
+        <a href="oeffnungszeiten.php" class="btn btn-secondary">Abbrechen</a>
+    <?php endif; ?>
 
-                </form>
+</form>
             </div>
         </div>
 
@@ -191,6 +202,24 @@ $days = [
         </table>
 
     </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const closedCheckbox = document.getElementById("closed");
+    const openingField = document.getElementById("opening_time");
+    const closingField = document.getElementById("closing_time");
+
+    closedCheckbox.addEventListener("change", function() {
+        if (this.checked) {
+            openingField.disabled = true;
+            closingField.disabled = true;
+        } else {
+            openingField.disabled = false;
+            closingField.disabled = false;
+        }
+    });
+});
+</script>
 
 </body>
 
