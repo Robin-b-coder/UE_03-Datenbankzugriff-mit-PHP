@@ -4,6 +4,7 @@ session_start();
 include_once "db.php";
 
 $error = "";
+
 if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
