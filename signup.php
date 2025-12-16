@@ -8,25 +8,30 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    // prüfen, ob Benutzer existiert
-    $stmt = $db->prepare("SELECT id FROM users WHERE username = ?");
-    $stmt->execute([$username]);
-    if ($stmt->fetch()) {
-        $message = "Benutzername existiert bereits!";
+    // Passwort-Validierung: mindestens 1 Groß-, 1 Kleinbuchstabe, 1 Sonderzeichen und 8 Zeichen lang
+if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$/', $password)) {        $message = "Passwort muss mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl, ein Sonderzeichen enthalten und mindestens 8 Zeichen lang sein!";
     } else {
-        // Passwort hashen
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        // prüfen, ob Benutzer existiert
+        $stmt = $db->prepare("SELECT id FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        if ($stmt->fetch()) {
+            $message = "Benutzername existiert bereits!";
+        } else {
+            // Passwort hashen
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        // Benutzer speichern
-        $stmt = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-        $stmt->execute([$username, $hashedPassword]);
+            // Benutzer speichern
+            $stmt = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+            $stmt->execute([$username, $hashedPassword]);
 
-        $_SESSION['logged_in'] = true;
-        $_SESSION['username'] = $username;
-        $message = "Registrierung erfolgreich!";
+            $_SESSION['logged_in'] = true;
+            $_SESSION['username'] = $username;
+            $message = "Registrierung erfolgreich!";
+        }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="de">
