@@ -34,7 +34,7 @@ if (!preg_match('/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*\W).{8,}$/', $password)) {
 
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-AT">
 
 <head>
     <meta charset="UTF-8">

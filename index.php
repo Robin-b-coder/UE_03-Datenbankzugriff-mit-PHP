@@ -10,17 +10,12 @@ if (!isset($_SESSION['merkliste'])) {
 
 // Kopie für Button-Farbprüfung
 $merkliste = $_SESSION['merkliste'];
-$merkliste = $_SESSION['merkliste'];
 
 function existsInList($list, $value)
 {
-    foreach ($list as $item) {
-        if ($item === $value) {
-            return true;
-        }
-    }
-    return false;
+    return in_array($value, $list, true);
 }
+
 
 if (isset($_POST['merk_buch'])) {
     $buch = $_POST['merk_buch'];
@@ -43,8 +38,8 @@ if ($today && !$today['closed']) {
     $geoeffnet = ($jetzt >= $start && $jetzt <= $ende);
 } else {
     $geoeffnet = false;
-    $startStr = $today['opening_time'] ?? "08:00";
-    $endeStr  = $today['closing_time'] ?? "18:00";
+    $startStr = null;
+    $endeStr  = null;
 }
 ?>
 <!DOCTYPE html>
@@ -67,8 +62,13 @@ if ($today && !$today['closed']) {
             <?php if ($geoeffnet): ?>
                 Wir haben geöffnet! (<?= htmlspecialchars($startStr) ?> - <?= htmlspecialchars($endeStr) ?>)
             <?php else: ?>
-                Momentan geschlossen. Unsere Öffnungszeiten: <?= htmlspecialchars($startStr) ?> - <?= htmlspecialchars($endeStr) ?>
+                <?php if ($startStr && $endeStr): ?>
+                    Momentan geschlossen. Unsere Öffnungszeiten: <?= htmlspecialchars($startStr) ?> - <?= htmlspecialchars($endeStr) ?>
+                <?php else: ?>
+                    Heute ganztägig geschlossen.
+                <?php endif; ?>
             <?php endif; ?>
+
         </p>
     </div>
 
@@ -116,17 +116,21 @@ if ($today && !$today['closed']) {
 
 
     <form id="mittig" action="" method="post">
-        <label>E-Mail:
+        <div class="mb-2">
+            <label>E-Mail:</label>
             <input name="email" required>
-            <label>Name:
-                <input name="fullName" required>
-            </label>
-            <label>Adresse:
-                <input name="address" required>
-
-            </label>
-            <button type="submit">anmelden</button>
+        </div>
+        <div class="mb-2">
+            <label>Name:</label>
+            <input name="fullName" required>
+        </div>
+        <div class="mb-2">
+            <label>Adresse:</label>
+            <input name="address" required>
+        </div>
+        <button type="submit">Anmelden</button>
     </form>
+
     <br>
 
     <?php
@@ -141,11 +145,13 @@ if ($today && !$today['closed']) {
         echo '<div class="alert alert-success">Danke, Ihre Anmeldung wurde erfolgreich gespeichert!</div>';
     }
 
+    echo '<div class="text-center mt-3">
+        <a style="font-weight: bold;" href="newsletter_list.php" class="btn btn-link">
+            Bisherige Newsletter-Anmeldungen anzeigen
+        </a>
+      </div>';
+
     ?>
-
-    <p><a href="newsletter_list.php">Bisherige Newsletter-Anmeldungen anzeigen</a></p>
-
-
     <div class="container my-5">
         <h2 class="mb-4">Unsere Empfehlungen</h2>
         <div id="empfehlungKarussel" class="carousel slide" data-bs-ride="carousel">

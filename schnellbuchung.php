@@ -1,11 +1,18 @@
 <?php
 include_once 'db.php';
 // Öffnungszeiten einlesen
-$zeiten = json_decode(file_get_contents(__DIR__ . '/oeffnungszeiten.json'), true);
+$heuteWochentag = date('N'); // 1=Montag ... 7=Sonntag
+$stmt = $db->prepare("SELECT * FROM oeffnungszeiten WHERE weekday=?");
+$stmt->execute([$heuteWochentag]);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Zeiten für Vergleich
-$startStr = $zeiten['start'] ?? "08:00";
-$endeStr  = $zeiten['ende'] ?? "18:00";
+if ($row && !$row['closed']) {
+    $startStr = $row['opening_time'];
+    $endeStr  = $row['closing_time'];
+} else {
+    die("Heute geschlossen. Die Schnellbuchung ist nur während der Öffnungszeiten möglich.");
+}
+
 $heute = date('Y-m-d');
 $start = strtotime("$heute $startStr");
 $ende  = strtotime("$heute $endeStr");
@@ -21,23 +28,6 @@ if (!$geoeffnet) {
 
 // Formular absenden
 $message = "";
-/*if (isset($_POST['name'], $_POST['anzahl'], $_POST['zeit'])) {
-    $name   = htmlspecialchars($_POST['name']);
-    $anzahl = (int)$_POST['anzahl'];
-    $zeit   = $_POST['zeit'];
-
-    // gewünschte Zeit als Timestamp
-    $buchungsZeit = strtotime("$heute $zeit");
-
-    if ($buchungsZeit < $start || $buchungsZeit > $ende) {
-        $message = "Die gewählte Zeit liegt außerhalb unserer Öffnungszeiten ($startStr - $endeStr).";
-    } else {
-        $line = "$name;$anzahl;$zeit\n";
-        file_put_contents(__DIR__ . '/buchung.txt', $line, FILE_APPEND);
-        $message = "Vielen Dank, $name! Ihre Schnellbuchung wurde angenommen";
-    }
-}*/ /*gespeichert auf buchung.txt*/
-
 
 include_once "db.php";
 
@@ -53,7 +43,7 @@ if (isset($_POST['name'], $_POST['anzahl'], $_POST['zeit'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-AT">
 
 <head>
     <meta charset="UTF-8">

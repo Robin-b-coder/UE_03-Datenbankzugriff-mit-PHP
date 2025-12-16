@@ -31,7 +31,7 @@ if (isset($_POST['edit_id'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-AT">
 
 <head>
     <meta charset="UTF-8">
