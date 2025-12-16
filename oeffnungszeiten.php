@@ -164,28 +164,28 @@ $days = [
             </tr>
 
             <?php foreach ($list as $row): ?>
-    <tr>
-        <td><?= $row['id'] ?></td>
-        <td><?= $days[$row['weekday']] ?></td>
-        <td>
-            <?php
-            if ($row['closed']) {
-                echo '<strong>Geschlossen</strong>';
-            } else {
-                echo $row['opening_time'] . ' - ' . $row['closing_time'];
-            }
-            ?>
-        </td>
-        <td>
-            <a href="?edit=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Bearbeiten</a>
-            <a href="?delete=<?= $row['id'] ?>"
-               class="btn btn-danger btn-sm"
-               onclick="return confirm('Sicher löschen?');">
-                Löschen
-            </a>
-        </td>
-    </tr>
-<?php endforeach; ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $days[$row['weekday']] ?></td>
+                    <td>
+                        <?php
+                        if ($row['closed']) {
+                            echo '<strong>Geschlossen</strong>';
+                        } else {
+                            echo $row['opening_time'] . ' - ' . $row['closing_time'];
+                        }
+                        ?>
+                    </td>
+                    <td>
+                        <a href="?edit=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Bearbeiten</a>
+                        <a href="?delete=<?= $row['id'] ?>"
+                            class="btn btn-danger btn-sm"
+                            onclick="return confirm('Sicher löschen?');">
+                            Löschen
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
 
         </table>
 
