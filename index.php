@@ -26,20 +26,24 @@ if (isset($_POST['merk_buch'])) {
 
 // Öffnungszeiten aus DB
 $stmt = $db->prepare("SELECT * FROM oeffnungszeiten WHERE weekday=?");
-$stmt->execute([date('N')]);
-$today = $stmt->fetch();
+$stmt->execute([date('N')]); // 1=Montag ... 7=Sonntag
+$today = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($today && !$today['closed']) {
-    $startStr = $today['opening_time'];
-    $endeStr  = $today['closing_time'];
-    $start = strtotime(date('Y-m-d') . ' ' . $startStr);
-    $ende  = strtotime(date('Y-m-d') . ' ' . $endeStr);
-    $jetzt = time();
-    $geoeffnet = ($jetzt >= $start && $jetzt <= $ende);
-} else {
-    $geoeffnet = false;
-    $startStr = null;
-    $endeStr  = null;
+$geoeffnet = false;
+$startStr = null;
+$endeStr  = null;
+
+if ($today) {
+    if (!$today['closed'] && $today['opening_time'] && $today['closing_time']) {
+        $startStr = $today['opening_time'];
+        $endeStr  = $today['closing_time'];
+
+        $start = strtotime(date('Y-m-d') . ' ' . $startStr);
+        $ende  = strtotime(date('Y-m-d') . ' ' . $endeStr);
+        $jetzt = time();
+
+        $geoeffnet = ($jetzt >= $start && $jetzt <= $ende);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -57,17 +61,22 @@ if ($today && !$today['closed']) {
 <body>
     <?php include '_menu.php'; ?>
 
-    <div class="container mt-3">
+    <div class="container mt-5">
         <p>
-            <?php if ($geoeffnet): ?>
-                Wir haben geöffnet! (<?= htmlspecialchars($startStr) ?> - <?= htmlspecialchars($endeStr) ?>)
-            <?php else: ?>
-                <?php if ($startStr && $endeStr): ?>
-                    Momentan geschlossen. Unsere Öffnungszeiten: <?= htmlspecialchars($startStr) ?> - <?= htmlspecialchars($endeStr) ?>
-                <?php else: ?>
-                    Heute ganztägig geschlossen.
-                <?php endif; ?>
-            <?php endif; ?>
+         <?php if ($geoeffnet): ?>
+    <div class="alert alert-success text-center">
+        Wir haben geöffnet! (<?= htmlspecialchars($startStr) ?> - <?= htmlspecialchars($endeStr) ?>)
+    </div>
+<?php else: ?>
+    <div class="alert alert-danger text-center">
+        <?php if ($startStr && $endeStr): ?>
+            Momentan geschlossen. Unsere Öffnungszeiten: <?= htmlspecialchars($startStr) ?> - <?= htmlspecialchars($endeStr) ?>
+        <?php else: ?>
+            Heute ganztägig geschlossen.
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+
 
         </p>
     </div>
