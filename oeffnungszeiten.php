@@ -77,7 +77,7 @@ $days = [
 ];
 ?>
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-AT">
 
 <head>
     <meta charset="UTF-8">

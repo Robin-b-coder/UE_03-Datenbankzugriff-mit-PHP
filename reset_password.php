@@ -34,7 +34,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de-AT">
 
 <head>
     <meta charset="UTF-8">
