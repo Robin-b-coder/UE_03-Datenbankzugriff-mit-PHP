@@ -35,7 +35,7 @@ $message = "";
 if (isset($_POST['name'], $_POST['anzahl'], $_POST['zeit'])) {
     $stmt = $db->prepare("INSERT INTO buchungen (name, anzahl, zeit) VALUES (?, ?, ?)");
     $stmt->execute([$_POST['name'], (int)$_POST['anzahl'], $_POST['zeit']]);
-    $message = "Vielen Dank, {$_POST['name']}! Ihre Schnellbuchung wurde angenommen.";
+    $message = "Vielen Dank, " . htmlspecialchars($_POST['name']) . "! Ihre Schnellbuchung wurde angenommen.";
 }
 ?>
 

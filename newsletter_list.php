@@ -62,7 +62,7 @@ if (isset($_POST['edit_id'])) {
                     <div class="mb-3">
                         <label>Email</label>
                         <input class="form-control" type="email" name="email"
-                            value="<?= $editData['email'] ?? '' ?>" required>
+                            value="<?= htmlspecialchars($editData['email'] ?? '')?>" required>
                     </div>
 
                     <div class="mb-3">

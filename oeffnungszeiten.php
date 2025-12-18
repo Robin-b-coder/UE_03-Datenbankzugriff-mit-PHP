@@ -184,7 +184,7 @@ $days = [
                         if ($row['closed']) {
                             echo '<strong>Geschlossen</strong>';
                         } else {
-                            echo $row['opening_time'] . ' - ' . $row['closing_time'];
+                            echo htmlspecialchars($row['opening_time']) . ' - ' . htmlspecialchars($row['closing_time']);
                         }
                         ?>
                     </td>

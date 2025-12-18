@@ -54,7 +54,7 @@ if ($today && !$today['closed']) {
                 <?php if (!empty($_SESSION['logged_in'])): ?>
                     <li class="nav-item"><a class="nav-link" href="newsletter_list.php">Newsletter</a></li>
                     <li class="nav-item"><a class="nav-link" href="oeffnungszeiten.php">Öffnungszeiten editieren</a></li>
-                    <li class="nav-item"><a class="nav-link text-danger" href="logout.php">Logout (<?= $_SESSION['username'] ?>)</a></li>
+                    <li class="nav-item"><a class="nav-link text-danger" href="logout.php">Logout (<?= htmlspecialchars($_SESSION['username']) ?>)</a></li>
                 <?php else: ?>
                     <li class="nav-item"><a class="nav-link" href="login.php">Anmelden</a></li>
                     <li class="nav-item"><a class="nav-link" href="signup.php">Registrieren</a></li>
